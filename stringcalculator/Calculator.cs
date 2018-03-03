@@ -11,17 +11,10 @@ namespace stringcalculator
         public int CalculateString(string number)
         {
             if (number == "")
-            {
-                return 0;
-            }
+                  return 0;
             var myNumbers = parseNumbers(number);
-            var returnNumber = 0;
-            foreach (var num in myNumbers)
-            {
-                returnNumber += num;
-            }
-         
-            return returnNumber;
+            var addMyNumbers = AddMyNumbers(myNumbers);
+            return addMyNumbers;
         }
 
         List<int> parseNumbers(string number)
@@ -29,10 +22,16 @@ namespace stringcalculator
             var splitUpNumbers = number.Split(',');
             var splitNumbers = NumberMyString(splitUpNumbers);
             CheckForNegatives(splitNumbers);
+            var myNumberList = CreateNumberList(splitNumbers);
+            return myNumberList;   
+        }
+
+        List<int> CreateNumberList(List<int> splitNumbers)
+        {
             var numbersList = new List<int>();
-            
+
             foreach (var num in splitNumbers)
-            {   
+            {
                 if (num < 1000)
                     numbersList.Add(num);
             }
@@ -51,22 +50,41 @@ namespace stringcalculator
             return numberReturn;
         }
 
-        private void CheckForNegatives(List<int> numbers)
+        void CheckForNegatives(List<int> numbers)
+        {
+            var checkForNegatives = negativeList(numbers);
+            if (checkForNegatives.Count > 0)
+            {
+                var negativesToString = string.Join(",", checkForNegatives.Select(x=> x.ToString()));
+                throw new Exception($"You are receiving this message because you entered the negative numbers ({negativesToString}), which the application does not support.");
+            }
+        }
+
+        List<int> negativeList(List<int> numbers)
         {
             var negativeNumbers = new List<int>();
 
             foreach (var num in numbers)
             {
                 if (num < 0)
-                    negativeNumbers.Add(num);                    
+                    negativeNumbers.Add(num);
             }
 
-            if (negativeNumbers.Count > 0)
-            {
-                var negativesToString = string.Join(",", negativeNumbers.Select(x=> x.ToString()));
-                throw new Exception($"You are receiving this message because you entered the negative numbers ({negativesToString}), which the application does not support.");
-            }
+            return negativeNumbers;
         }
+
+        int AddMyNumbers(List<int> myNumbers)
+        {
+            var returnNumber = 0;
+            foreach (var num in myNumbers)
+            {
+                returnNumber += num;
+            }
+
+            return returnNumber;
+        }
+
+
 
     }
 }
