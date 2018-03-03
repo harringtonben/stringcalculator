@@ -28,6 +28,7 @@ namespace stringcalculator
         {
             var splitUpNumbers = number.Split(',');
             var splitNumbers = NumberMyString(splitUpNumbers);
+            CheckForNegatives(splitNumbers);
             var numbersList = new List<int>();
             
             foreach (var num in splitNumbers)
@@ -48,6 +49,23 @@ namespace stringcalculator
                 numberReturn.Add(stringToNumber);
             }
             return numberReturn;
+        }
+
+        private void CheckForNegatives(List<int> numbers)
+        {
+            var negativeNumbers = new List<int>();
+
+            foreach (var num in numbers)
+            {
+                if (num < 0)
+                    negativeNumbers.Add(num);                    
+            }
+
+            if (negativeNumbers.Count > 0)
+            {
+                var negativesToString = string.Join(",", negativeNumbers.Select(x=> x.ToString()));
+                throw new Exception($"You are receiving this message because you entered the negative numbers ({negativesToString}), which the application does not support.");
+            }
         }
 
     }

@@ -56,7 +56,7 @@ namespace stringcalculator.test
         }
 
         [Test]
-        public void If_I_have_enter_a_number_greater_than_1000_then_the_calculator_should_ignore_it()
+        public void If_I_enter_a_number_greater_than_1000_then_the_calculator_should_ignore_it()
         {
             var number = "1,1005";
             var calculator = new Calculator();
@@ -64,6 +64,17 @@ namespace stringcalculator.test
             var result = calculator.CalculateString(number);
 
             Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void If_I_enter_negative_numbers_then_the_calculator_should_throw_an_exception()
+        {
+            var number = "1,-2,-3,-4";
+            var calculator = new Calculator();
+
+            var error = new System.Exception("You are receiving this message because you entered the negative numbers ({negativesToString}), which the application does not support.");
+
+            Assert.Throws(typeof(System.Exception), () => calculator.CalculateString(number));
         }
     }
 }
