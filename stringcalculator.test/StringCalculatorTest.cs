@@ -19,7 +19,29 @@ namespace stringcalculator.test
 
             var result = calculator.CalculateString(number);
 
-            Assert.AreEqual("0", result);
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void If_I_have_a_single_number_string_the_method_should_return_that_number()
+        {
+            var number = "1";
+            var calculator = new Calculator();
+
+            var result = calculator.CalculateString(number);
+
+            Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void If_I_have_2_numbers_string_the_method_should_return_that_number()
+        {
+            var number = "1,2";
+            var calculator = new Calculator();
+
+            var result = calculator.CalculateString(number);
+
+            Assert.AreEqual(3, result);
         }
     }
 }

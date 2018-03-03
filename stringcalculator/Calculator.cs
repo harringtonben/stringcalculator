@@ -8,9 +8,30 @@ namespace stringcalculator
 {
     public class Calculator
     {
-        public object CalculateString(string number)
+        public int CalculateString(string number)
         {
-            throw new NotImplementedException();
+            var myNumbers = parseNumbers(number);
+            var returnNumber = 0;
+            foreach (var num in myNumbers)
+            {
+                returnNumber += num;
+            }
+            
+            return returnNumber;
+        }
+
+        List<int> parseNumbers(string number)
+        {
+            var splitUpNumbers = number.Split(',');
+            var numbersList = new List<int>();
+
+            foreach (var num in splitUpNumbers)
+            {
+                var stringToNumber = int.Parse(num);
+                numbersList.Add(stringToNumber);
+            }
+
+            return numbersList;
         }
     }
 }
