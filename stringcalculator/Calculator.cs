@@ -10,13 +10,17 @@ namespace stringcalculator
     {
         public int CalculateString(string number)
         {
+            if (number == "")
+            {
+                return 0;
+            }
             var myNumbers = parseNumbers(number);
             var returnNumber = 0;
             foreach (var num in myNumbers)
             {
                 returnNumber += num;
             }
-            
+         
             return returnNumber;
         }
 
@@ -28,7 +32,8 @@ namespace stringcalculator
             foreach (var num in splitUpNumbers)
             {
                 var stringToNumber = int.Parse(num);
-                numbersList.Add(stringToNumber);
+                if (stringToNumber < 1000)
+                    numbersList.Add(stringToNumber);
             }
 
             return numbersList;
