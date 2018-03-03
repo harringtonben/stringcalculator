@@ -27,16 +27,28 @@ namespace stringcalculator
         List<int> parseNumbers(string number)
         {
             var splitUpNumbers = number.Split(',');
+            var splitNumbers = NumberMyString(splitUpNumbers);
             var numbersList = new List<int>();
-
-            foreach (var num in splitUpNumbers)
-            {
-                var stringToNumber = int.Parse(num);
-                if (stringToNumber < 1000)
-                    numbersList.Add(stringToNumber);
+            
+            foreach (var num in splitNumbers)
+            {   
+                if (num < 1000)
+                    numbersList.Add(num);
             }
 
             return numbersList;
         }
+
+        List<int> NumberMyString(string[] stringOfNumbers)
+        {
+            var numberReturn = new List<int>();
+            foreach (var num in stringOfNumbers)
+            {
+                var stringToNumber = int.Parse(num);
+                numberReturn.Add(stringToNumber);
+            }
+            return numberReturn;
+        }
+
     }
 }
